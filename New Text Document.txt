@@ -1,0 +1,966 @@
+
+CHNSIPDT0T303+user@CHNSIPDT0T303 MINGW64 ~
+$ cd /c/Temp
+
+CHNSIPDT0T303+user@CHNSIPDT0T303 MINGW64 /c/Temp
+$ chmod 400 kp162aug.pem
+
+CHNSIPDT0T303+user@CHNSIPDT0T303 MINGW64 /c/Temp
+$ ssh -i "kp162aug.pem" ec2-user@ec2-34-213-76-0.us-west-2.comput
+The authenticity of host 'ec2-34-213-76-0.us-west-2.compute.amazo3.76.0)' can't be established.
+ECDSA key fingerprint is SHA256:qor1ah/JGNH1sN5A17VZHOxZOP+fiebKQ
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'ec2-34-213-76-0.us-west-2.compute.ama13.76.0' (ECDSA) to the list of known hosts.
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2017.03-release-notes/
+2 package(s) needed for security, out of 6 available
+Run "sudo yum update" to apply all updates.
+[ec2-user@ip-172-31-38-75 ~]$ sudo yum install docker
+Loaded plugins: priorities, update-motd, upgrade-helper
+amzn-main                                                | 2.1 kB
+amzn-updates                                             | 2.3 kB
+Resolving Dependencies
+--> Running transaction check
+---> Package docker.x86_64 0:17.03.1ce-1.50.amzn1 will be install
+--> Processing Dependency: xfsprogs for package: docker-17.03.1ce_64
+--> Processing Dependency: libseccomp.so.2()(64bit) for package: e-1.50.amzn1.x86_64
+--> Running transaction check
+---> Package libseccomp.x86_64 0:2.3.1-2.4.amzn1 will be installe
+---> Package xfsprogs.x86_64 0:4.5.0-9.21.amzn1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=================================================================
+ Package         Arch        Version                    Repositor
+=================================================================
+Installing:
+ docker          x86_64      17.03.1ce-1.50.amzn1       amzn-upda
+Installing for dependencies:
+ libseccomp      x86_64      2.3.1-2.4.amzn1            amzn-upda
+ xfsprogs        x86_64      4.5.0-9.21.amzn1           amzn-main
+
+Transaction Summary
+=================================================================
+Install  1 Package (+2 Dependent packages)
+
+Total download size: 24 M
+Installed size: 69 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/3): libseccomp-2.3.1-2.4.amzn1.x86_64.rpm               |  79
+(2/3): xfsprogs-4.5.0-9.21.amzn1.x86_64.rpm                | 1.7
+(3/3): docker-17.03.1ce-1.50.amzn1.x86_64.rpm              |  22
+-----------------------------------------------------------------
+Total                                              4.3 MB/s |  24
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libseccomp-2.3.1-2.4.amzn1.x86_64
+  Installing : xfsprogs-4.5.0-9.21.amzn1.x86_64
+  Installing : docker-17.03.1ce-1.50.amzn1.x86_64
+  Verifying  : xfsprogs-4.5.0-9.21.amzn1.x86_64
+  Verifying  : docker-17.03.1ce-1.50.amzn1.x86_64
+  Verifying  : libseccomp-2.3.1-2.4.amzn1.x86_64
+
+Installed:
+  docker.x86_64 0:17.03.1ce-1.50.amzn1
+
+Dependency Installed:
+  libseccomp.x86_64 0:2.3.1-2.4.amzn1     xfsprogs.x86_64 0:4.5.0
+
+Complete!
+[ec2-user@ip-172-31-38-75 ~]$ sudo su -
+[root@ip-172-31-38-75 ~]# service docker status
+docker is stopped
+[root@ip-172-31-38-75 ~]# service docker start
+Starting cgconfig service:                                 [  OK
+Starting docker:        .                                  [  OK
+[root@ip-172-31-38-75 ~]# docker run -i -t hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+b04784fba78d: Pull complete
+Digest: sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d7
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working c
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Doc
+ 3. The Docker daemon created a new container from that image whi
+    executable that produces the output you are currently reading
+ 4. The Docker daemon streamed that output to the Docker client,
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://cloud.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+
+[root@ip-172-31-38-75 ~]# docker run -it ubuntu bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+d5c6f90da05d: Pull complete
+1300883d87d5: Pull complete
+c220aa3cfc1b: Pull complete
+2e9398f099dc: Pull complete
+dc27a084064f: Pull complete
+Digest: sha256:34471448724419596ca4e890496d375801de21b0e67b81a77f
+Status: Downloaded newer image for ubuntu:latest
+root@4970effb5a3f:/# exit
+exit
+[root@ip-172-31-38-75 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATSIZE
+ubuntu              latest              ccc7a11d65b1        5 day120 MB
+hello-world         latest              1815c82652c0        2 mon1.84 kB
+[root@ip-172-31-38-75 ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATSTATUS              PORTS               NAMES
+[root@ip-172-31-38-75 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATSTATUS                      PORTS               NAMES
+4970effb5a3f        ubuntu              "bash"              3 minExited (0) 26 seconds ago                       practical_engelba
+7aa7b7b8e6e7        hello-world         "/hello"            8 minExited (0) 8 minutes ago                        hungry_haibt
+[root@ip-172-31-38-75 ~]# docker run ubuntu:14.04 echo "Hello Wor
+Unable to find image 'ubuntu:14.04' locally
+14.04: Pulling from library/ubuntu
+48f0413f904d: Pull complete
+2bd2b2e92c5f: Pull complete
+06ed1e3efabb: Pull complete
+a220dbf88993: Pull complete
+57c164185602: Pull complete
+Digest: sha256:6a3e01207b899a347115f3859cf8a6031fdbebb6ffedea6c20
+Status: Downloaded newer image for ubuntu:14.04
+Hello World
+[root@ip-172-31-38-75 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                CR   STATUS                      PORTS               NAMES
+36491c0cfbc5        ubuntu:14.04        "echo 'Hello World'"   25   Exited (0) 24 seconds ago                       friendly_jenni
+4970effb5a3f        ubuntu              "bash"                 12   Exited (0) 9 minutes ago                        practical_enge
+7aa7b7b8e6e7        hello-world         "/hello"               17   Exited (0) 17 minutes ago                       hungry_haibt
+[root@ip-172-31-38-75 ~]# docker run centos:7 ping 127.0.0.1 -c 5
+Unable to find image 'centos:7' locally
+7: Pulling from library/centos
+74f0853ba93b: Pull complete
+Digest: sha256:26f74cefad82967f97f3eeeef88c1b6262f9b42bc96f2ad61d
+Status: Downloaded newer image for centos:7
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=255 time=0.029 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=4 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=5 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=6 ttl=255 time=0.044 ms
+64 bytes from 127.0.0.1: icmp_seq=7 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=8 ttl=255 time=0.038 ms
+64 bytes from 127.0.0.1: icmp_seq=9 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=10 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=11 ttl=255 time=0.038 ms
+64 bytes from 127.0.0.1: icmp_seq=12 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=13 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=14 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=15 ttl=255 time=0.043 ms
+64 bytes from 127.0.0.1: icmp_seq=16 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=17 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=18 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=19 ttl=255 time=0.037 ms
+64 bytes from 127.0.0.1: icmp_seq=20 ttl=255 time=0.046 ms
+64 bytes from 127.0.0.1: icmp_seq=21 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=22 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=23 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=24 ttl=255 time=0.037 ms
+64 bytes from 127.0.0.1: icmp_seq=25 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=26 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=27 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=28 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=29 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=30 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=31 ttl=255 time=0.044 ms
+64 bytes from 127.0.0.1: icmp_seq=32 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=33 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=34 ttl=255 time=0.038 ms
+64 bytes from 127.0.0.1: icmp_seq=35 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=36 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=37 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=38 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=39 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=40 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=41 ttl=255 time=0.043 ms
+64 bytes from 127.0.0.1: icmp_seq=42 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=43 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=44 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=45 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=46 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=47 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=48 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=49 ttl=255 time=0.037 ms
+64 bytes from 127.0.0.1: icmp_seq=50 ttl=255 time=0.034 ms
+
+--- 127.0.0.1 ping statistics ---
+50 packets transmitted, 50 received, 0% packet loss, time 50183ms
+rtt min/avg/max/mdev = 0.029/0.039/0.046/0.008 ms
+[root@ip-172-31-38-75 ~]# docker run -d centos:7 ping 127.0.0.1 -
+563815d33d62686728041bc22ff5f546c3bcca9d2e740430b804f2f8aa9de13a
+[root@ip-172-31-38-75 ~]# docker run -d -P tomcat:7
+Unable to find image 'tomcat:7' locally
+7: Pulling from library/tomcat
+ad74af05f5a2: Pull complete
+2b032b8bbe8b: Pull complete
+99a5213ead46: Pull complete
+7de34ca31efd: Pull complete
+9b22e57d98bb: Pull complete
+12cd7a66c3fd: Pull complete
+880bb942de44: Pull complete
+6ada99602995: Pull complete
+90451a97de52: Pull complete
+646677f3b1ed: Pull complete
+1e23e3421594: Pull complete
+6ea7a2fda905: Pull complete
+Digest: sha256:c9fb261508e2bba25f84de653a64e98acd2ad2b42dfa4b25bf
+Status: Downloaded newer image for tomcat:7
+f4e26cd51d2cb35829eea1217194640db47c21cc08bd897ddb6a9563ec95c609
+[root@ip-172-31-38-75 ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREAT STATUS              PORTS                     NAMES
+f4e26cd51d2c        tomcat:7            "catalina.sh run"   About Up About a minute   0.0.0.0:32768->8080/tcp   stupefied_mirzakha
+[root@ip-172-31-38-75 ~]# docker run -d -t ubuntu:14:04 /bin/bash
+docker: Error parsing reference: "ubuntu:14:04" is not a valid reory/tag: invalid reference format.
+See 'docker run --help'.
+[root@ip-172-31-38-75 ~]# apt-get update
+-bash: apt-get: command not found
+[root@ip-172-31-38-75 ~]# docker run -i -t ubuntu:14:04 /bin/bash
+docker: Error parsing reference: "ubuntu:14:04" is not a valid reory/tag: invalid reference format.
+See 'docker run --help'.
+[root@ip-172-31-38-75 ~]# docker run -i -t ubuntu:14:04 /bin/bash
+docker: Error parsing reference: "ubuntu:14:04" is not a valid rery/tag: invalid reference format.
+See 'docker run --help'.
+[root@ip-172-31-38-75 ~]# apt-get update
+-bash: apt-get: command not found
+[root@ip-172-31-38-75 ~]# docker run -i -t ubuntu:14:04 /bin/bash
+docker: Error parsing reference: "ubuntu:14:04" is not a valid rery/tag: invalid reference format.
+See 'docker run --help'.
+[root@ip-172-31-38-75 ~]#
+[root@ip-172-31-38-75 ~]# docker run -i -t ubuntu:14.04 /bin/bash
+root@fddf9d222249:/#
+root@fddf9d222249:/# apt-get update
+Get:1 http://security.ubuntu.com trusty-security InRelease [65.9
+Ign http://archive.ubuntu.com trusty InRelease
+Get:2 http://archive.ubuntu.com trusty-updates InRelease [65.9 kB
+100% [2 InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting fo                                                                 Get:3 http://security.ubuntu.com trusty-security/universe Sources kB]
+Get:4 http://archive.ubuntu.com trusty-backports InRelease [65.9
+99% [4 InRelease gpgv 65.9 kB] [Waiting for headers] [3 Sources 7                                                                 Get:5 http://archive.ubuntu.com trusty Release.gpg [933 B]
+Get:6 http://security.ubuntu.com trusty-security/main amd64 Packa11 kB]
+Get:7 http://archive.ubuntu.com trusty-updates/universe Sources []
+Get:8 http://archive.ubuntu.com trusty-updates/main amd64 Package0 kB]
+61% [6 Packages 0 B] [8 Packages 244 kB/1260 kB 19%] [Waiting for                                                                 Get:9 http://security.ubuntu.com trusty-security/restricted amd64ges [17.9 kB]
+63% [9 Packages 0 B] [8 Packages 286 kB/1260 kB 23%] [Waiting for                                                                 Get:10 http://security.ubuntu.com trusty-security/universe amd64 es [230 kB]
+96% [10 Packages 230 kB] [8 Packages 1136 kB/1260 kB 90%] [Waitin                                                                 Get:11 http://security.ubuntu.com trusty-security/multiverse amd6ages [4016 B]
+Get:12 http://archive.ubuntu.com trusty-updates/restricted amd64 es [21.2 kB]
+Get:13 http://archive.ubuntu.com trusty-updates/universe amd64 Pa [543 kB]
+Get:14 http://archive.ubuntu.com trusty-updates/multiverse amd64 es [15.6 kB]
+Get:15 http://archive.ubuntu.com trusty-backports/main amd64 Pack14.8 kB]
+Get:16 http://archive.ubuntu.com trusty-backports/restricted amd6ages [40 B]
+Get:17 http://archive.ubuntu.com trusty-backports/universe amd64 es [52.6 kB]
+Get:18 http://archive.ubuntu.com trusty-backports/multiverse amd6ages [1396 B]
+Get:19 http://archive.ubuntu.com trusty Release [58.5 kB]
+Get:20 http://archive.ubuntu.com trusty/universe Sources [7926 kB
+70% [20 Sources 4503 kB/7926 kB 57%]                             79% [20 Sources 5564 kB/7926 kB 70%]                             89% [20 Sources 6621 kB/7926 kB 84%]                             96% [20 Sources 7457 kB/7926 kB 94%]                             100% [Working]                                                   100% [20 Sources 0 B]                                                                                                             Get:21 http://archive.ubuntu.com trusty/main amd64 Packages [1743
+87% [20 Sources 7926 kB] [21 Packages 49.2 kB/1743 kB 3%]        93% [21 Packages 871 kB/1743 kB 50%]                             100% [21 Packages 1695 kB/1743 kB 97%]                           100% [Working]                                                   100% [21 Packages 0 B]                                                                                                            Get:22 http://archive.ubuntu.com trusty/restricted amd64 Packages kB]
+100% [21 Packages 1743 kB] [Waiting for headers]                 100% [Waiting for headers]                                       100% [22 Packages 0 B] [Waiting for headers]                     100% [Waiting for headers]                                                                                                        Get:23 http://archive.ubuntu.com trusty/universe amd64 Packages [B]
+64% [23 Packages 14.2 kB/7589 kB 0%]                             68% [23 Packages 910 kB/7589 kB 12%]                             73% [23 Packages 1870 kB/7589 kB 25%]                            76% [23 Packages 2635 kB/7589 kB 35%]                            81% [23 Packages 3653 kB/7589 kB 48%]                            85% [23 Packages 4465 kB/7589 kB 59%]                            90% [23 Packages 5517 kB/7589 kB 73%]                            95% [23 Packages 6574 kB/7589 kB 87%]                            99% [23 Packages 7406 kB/7589 kB 98%]                            100% [Working]                                                   100% [23 Packages 0 B]                                                                                                            Get:24 http://archive.ubuntu.com trusty/multiverse amd64 PackageskB]
+99% [23 Packages 7589 kB] [24 Packages 44.0 kB/169 kB 26%]       100% [23 Packages 7589 kB]                                       100% [23 Packages 7589 kB]                                       100% [Working]                                                   100% [24 Packages 0 B]                                           100% [Working]                                                                                                                    Fetched 21.0 MB in 14s (1476 kB/s)
+Reading package lists... Done
+root@fddf9d222249:/# apt-get install curl
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following extra packages will be installed:
+  ca-certificates krb5-locales libasn1-8-heimdal libcurl3 libgssa5-2
+  libgssapi3-heimdal libhcrypto4-heimdal libheimbase1-heimdal
+  libheimntlm0-heimdal libhx509-5-heimdal libidn11 libk5crypto3 ltils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2
+  libroken18-heimdal librtmp0 libsasl2-2 libsasl2-modules libsaslles-db
+  libwind0-heimdal openssl
+Suggested packages:
+  krb5-doc krb5-user libsasl2-modules-otp libsasl2-modules-ldap
+  libsasl2-modules-sql libsasl2-modules-gssapi-mit
+  libsasl2-modules-gssapi-heimdal
+The following NEW packages will be installed:
+  ca-certificates curl krb5-locales libasn1-8-heimdal libcurl3
+  libgssapi-krb5-2 libgssapi3-heimdal libhcrypto4-heimdal libheimheimdal
+  libheimntlm0-heimdal libhx509-5-heimdal libidn11 libk5crypto3 ltils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2
+  libroken18-heimdal librtmp0 libsasl2-2 libsasl2-modules libsaslles-db
+  libwind0-heimdal openssl
+0 upgraded, 25 newly installed, 0 to remove and 0 not upgraded.
+Need to get 2683 kB of archives.
+After this operation, 11.6 MB of additional disk space will be us
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libroheimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [39.9 kB]
+Get:2 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libaseimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [160 kB]
+Get:3 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkrort0 amd64 1.12+dfsg-2ubuntu5.3 [30.7 kB]
+Get:4 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libk53 amd64 1.12+dfsg-2ubuntu5.3 [79.6 kB]
+Get:5 http://archive.ubuntu.com/ubuntu/ trusty/main libkeyutils1 1.5.6-1 [7318 B]
+Get:6 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkrmd64 1.12+dfsg-2ubuntu5.3 [262 kB]
+Get:7 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libgsrb5-2 amd64 1.12+dfsg-2ubuntu5.3 [114 kB]
+Get:8 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libhc-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [84.1 kB]
+Get:9 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libhe1-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [29.0 kB]
+Get:10 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libweimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [47.9 kB]
+Get:11 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libh-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [104 kB]
+Get:12 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libk-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [196 kB]
+Get:13 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libhm0-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [15.2 kB]
+Get:14 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libg-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [89.7 kB]
+Get:15 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libimd64 1.28-1ubuntu2.1 [94.4 kB]
+Get:16 http://archive.ubuntu.com/ubuntu/ trusty/main libsasl2-modb amd64 2.1.25.dfsg1-17build1 [14.9 kB]
+Get:17 http://archive.ubuntu.com/ubuntu/ trusty/main libsasl2-2 a.1.25.dfsg1-17build1 [56.5 kB]
+Get:18 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libl4-2 amd64 2.4.31-1+nmu2ubuntu8.4 [153 kB]
+Get:19 http://archive.ubuntu.com/ubuntu/ trusty-updates/main librmd64 2.4+20121230.gitdf6c518-1ubuntu0.1 [50.4 kB]
+Get:20 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libcmd64 7.35.0-1ubuntu2.10 [173 kB]
+Get:21 http://archive.ubuntu.com/ubuntu/ trusty-updates/main opend64 1.0.1f-1ubuntu2.22 [489 kB]
+Get:22 http://archive.ubuntu.com/ubuntu/ trusty-updates/main ca-ccates all 20160104ubuntu0.14.04.1 [190 kB]
+Get:23 http://archive.ubuntu.com/ubuntu/ trusty-updates/main krb5es all 1.12+dfsg-2ubuntu5.3 [13.5 kB]
+Get:24 http://archive.ubuntu.com/ubuntu/ trusty/main libsasl2-modmd64 2.1.25.dfsg1-17build1 [64.3 kB]
+Get:25 http://archive.ubuntu.com/ubuntu/ trusty-updates/main curl 7.35.0-1ubuntu2.10 [123 kB]
+Fetched 2683 kB in 4s (559 kB/s)
+Preconfiguring packages ...
+Selecting previously unselected package libroken18-heimdal:amd64.
+(Reading database ... 11569 files and directories currently insta
+Preparing to unpack .../libroken18-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libroken18-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libasn1-8-heimdal:amd64.
+Preparing to unpack .../libasn1-8-heimdal_1.6~git20131207+dfsg-1u.2_amd64.deb ...
+Unpacking libasn1-8-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../libkrb5support0_1.12+dfsg-2ubuntu5.3_amd6...
+Unpacking libkrb5support0:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../libk5crypto3_1.12+dfsg-2ubuntu5.3_amd64.d
+Unpacking libk5crypto3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../libkeyutils1_1.5.6-1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.5.6-1) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../libkrb5-3_1.12+dfsg-2ubuntu5.3_amd64.deb
+Unpacking libkrb5-3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../libgssapi-krb5-2_1.12+dfsg-2ubuntu5.3_amd ...
+Unpacking libgssapi-krb5-2:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libhcrypto4-heimdal:amd64
+Preparing to unpack .../libhcrypto4-heimdal_1.6~git20131207+dfsg-u1.2_amd64.deb ...
+Unpacking libhcrypto4-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Selecting previously unselected package libheimbase1-heimdal:amd6
+Preparing to unpack .../libheimbase1-heimdal_1.6~git20131207+dfsgtu1.2_amd64.deb ...
+Unpacking libheimbase1-heimdal:amd64 (1.6~git20131207+dfsg-1ubunt...
+Selecting previously unselected package libwind0-heimdal:amd64.
+Preparing to unpack .../libwind0-heimdal_1.6~git20131207+dfsg-1ub2_amd64.deb ...
+Unpacking libwind0-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.2
+Selecting previously unselected package libhx509-5-heimdal:amd64.
+Preparing to unpack .../libhx509-5-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libhx509-5-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libkrb5-26-heimdal:amd64.
+Preparing to unpack .../libkrb5-26-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libkrb5-26-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libheimntlm0-heimdal:amd6
+Preparing to unpack .../libheimntlm0-heimdal_1.6~git20131207+dfsgtu1.2_amd64.deb ...
+Unpacking libheimntlm0-heimdal:amd64 (1.6~git20131207+dfsg-1ubunt...
+Selecting previously unselected package libgssapi3-heimdal:amd64.
+Preparing to unpack .../libgssapi3-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libgssapi3-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libidn11:amd64.
+Preparing to unpack .../libidn11_1.28-1ubuntu2.1_amd64.deb ...
+Unpacking libidn11:amd64 (1.28-1ubuntu2.1) ...
+Selecting previously unselected package libsasl2-modules-db:amd64
+Preparing to unpack .../libsasl2-modules-db_2.1.25.dfsg1-17build1.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.25.dfsg1-17build1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../libsasl2-2_2.1.25.dfsg1-17build1_amd64.de
+Unpacking libsasl2-2:amd64 (2.1.25.dfsg1-17build1) ...
+Selecting previously unselected package libldap-2.4-2:amd64.
+Preparing to unpack .../libldap-2.4-2_2.4.31-1+nmu2ubuntu8.4_amd6...
+Unpacking libldap-2.4-2:amd64 (2.4.31-1+nmu2ubuntu8.4) ...
+Selecting previously unselected package librtmp0:amd64.
+Preparing to unpack .../librtmp0_2.4+20121230.gitdf6c518-1ubuntu064.deb ...
+Unpacking librtmp0:amd64 (2.4+20121230.gitdf6c518-1ubuntu0.1) ...
+Selecting previously unselected package libcurl3:amd64.
+Preparing to unpack .../libcurl3_7.35.0-1ubuntu2.10_amd64.deb ...
+Unpacking libcurl3:amd64 (7.35.0-1ubuntu2.10) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../openssl_1.0.1f-1ubuntu2.22_amd64.deb ...
+Unpacking openssl (1.0.1f-1ubuntu2.22) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../ca-certificates_20160104ubuntu0.14.04.1_a ...
+Unpacking ca-certificates (20160104ubuntu0.14.04.1) ...
+Selecting previously unselected package krb5-locales.
+Preparing to unpack .../krb5-locales_1.12+dfsg-2ubuntu5.3_all.deb
+Unpacking krb5-locales (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libsasl2-modules:amd64.
+Preparing to unpack .../libsasl2-modules_2.1.25.dfsg1-17build1_amb ...
+Unpacking libsasl2-modules:amd64 (2.1.25.dfsg1-17build1) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.35.0-1ubuntu2.10_amd64.deb ...
+Unpacking curl (7.35.0-1ubuntu2.10) ...
+Setting up libroken18-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libasn1-8-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Setting up libkrb5support0:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libk5crypto3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libkeyutils1:amd64 (1.5.6-1) ...
+Setting up libkrb5-3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libgssapi-krb5-2:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libhcrypto4-heimdal:amd64 (1.6~git20131207+dfsg-1ubunt...
+Setting up libheimbase1-heimdal:amd64 (1.6~git20131207+dfsg-1ubun ...
+Setting up libwind0-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Setting up libhx509-5-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libkrb5-26-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libheimntlm0-heimdal:amd64 (1.6~git20131207+dfsg-1ubun ...
+Setting up libgssapi3-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libidn11:amd64 (1.28-1ubuntu2.1) ...
+Setting up libsasl2-modules-db:amd64 (2.1.25.dfsg1-17build1) ...
+Setting up libsasl2-2:amd64 (2.1.25.dfsg1-17build1) ...
+Setting up libldap-2.4-2:amd64 (2.4.31-1+nmu2ubuntu8.4) ...
+Setting up librtmp0:amd64 (2.4+20121230.gitdf6c518-1ubuntu0.1) ..
+Setting up libcurl3:amd64 (7.35.0-1ubuntu2.10) ...
+Setting up openssl (1.0.1f-1ubuntu2.22) ...
+Setting up ca-certificates (20160104ubuntu0.14.04.1) ...
+Setting up krb5-locales (1.12+dfsg-2ubuntu5.3) ...
+Setting up libsasl2-modules:amd64 (2.1.25.dfsg1-17build1) ...
+Setting up curl (7.35.0-1ubuntu2.10) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.13) ...
+Processing triggers for ca-certificates (20160104ubuntu0.14.04.1)
+Updating certificates in /etc/ssl/certs... 173 added, 0 removed;
+Running hooks in /etc/ca-certificates/update.d....done.
+root@fddf9d222249:/# exit
+exit
+[root@ip-172-31-38-75 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  D              STATUS                      PORTS                 MES
+fddf9d222249        ubuntu:14.04        "/bin/bash"              a minute ago   Exited (0) 16 seconds ago                         iendly_almeida
+f4e26cd51d2c        tomcat:7            "catalina.sh run"        utes ago       Up 25 minutes               0.0.0.0:32768->8080/tcupefied_mirzakhani
+563815d33d62        centos:7            "ping 127.0.0.1 -c 50"   utes ago       Exited (0) 27 minutes ago                         irsty_keller
+d39be03a0622        centos:7            "ping 127.0.0.1 -c 50"   utes ago       Exited (0) 28 minutes ago                         irky_brattain
+36491c0cfbc5        ubuntu:14.04        "echo 'Hello World'"     utes ago       Exited (0) 36 minutes ago                         iendly_jennings
+4970effb5a3f        ubuntu              "bash"                   utes ago       Exited (0) 44 minutes ago                         actical_engelbart
+7aa7b7b8e6e7        hello-world         "/hello"                 utes ago       Exited (0) 52 minutes ago                         ngry_haibt
+[root@ip-172-31-38-75 ~]# docker commit <^C
+[root@ip-172-31-38-75 ~]# docker commit fddf9d222249 lavanya/curl
+sha256:e72fec94a84ffdd62041d28f5b9bd438a48ca04281da99250f1d8a9896
+[root@ip-172-31-38-75 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREAT         SIZE
+lavanya/curl        1.0                 e72fec94a84f        15 seago      220 MB
+ubuntu              latest              ccc7a11d65b1        5 day         120 MB
+ubuntu              14.04               c69811d4e993        5 day         188 MB
+tomcat              7                   77a01a142db4        6 day         357 MB
+centos              7                   328edcd84f1b        12 da         193 MB
+hello-world         latest              1815c82652c0        2 mono        1.84 kB
+[root@ip-172-31-38-75 ~]# docker run -i -t lavanya/curl:1.0
+root@a6fdaf9a5fe3:/#
+root@a6fdaf9a5fe3:/# exit
+exit
+[root@ip-172-31-38-75 ~]# docker run -i -t lavanya/curl:1.0 /bin/
+root@b56f3caaf6d2:/# which curl
+/usr/bin/curl
+root@b56f3caaf6d2:/# cd Test
+bash: cd: Test: No such file or directory
+root@b56f3caaf6d2:/# exiy
+bash: exiy: command not found
+root@b56f3caaf6d2:/# exit
+exit
+[root@ip-172-31-38-75 ~]# pwd
+/root
+[root@ip-172-31-38-75 ~]# mkdir Test
+[root@ip-172-31-38-75 ~]# cd Test
+[root@ip-172-31-38-75 Test]# logout
+[ec2-user@ip-172-31-38-75 ~]$ cd DockerFile
+-bash: cd: DockerFile: No such file or directory
+[ec2-user@ip-172-31-38-75 ~]$ DockerFile
+-bash: DockerFile: command not found
+[ec2-user@ip-172-31-38-75 ~]$ vi DockerFile
+[ec2-user@ip-172-31-38-75 ~]$ docker images
+Got permission denied while trying to connect to the Docker daemoet at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdockk/v1.27/images/json: dial unix /var/run/docker.sock: connect: pern denied
+[ec2-user@ip-172-31-38-75 ~]$ docker build -t lavanya/testimage:1
+"docker build" requires exactly 1 argument(s).
+See 'docker build --help'.
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+[ec2-user@ip-172-31-38-75 ~]$ docker images
+Got permission denied while trying to connect to the Docker daemoet at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdockk/v1.27/images/json: dial unix /var/run/docker.sock: connect: pern denied
+[ec2-user@ip-172-31-38-75 ~]$ docker build -t lavanya/testimage:1
+unable to prepare context: unable to evaluate symlinks in Dockerfth: lstat /home/ec2-user/Dockerfile: no such file or directory
+[ec2-user@ip-172-31-38-75 ~]$ pwd
+/home/ec2-user
+[ec2-user@ip-172-31-38-75 ~]$ cd
+[ec2-user@ip-172-31-38-75 ~]$ cd Test
+-bash: cd: Test: No such file or directory
+[ec2-user@ip-172-31-38-75 ~]$ mkdir Test
+[ec2-user@ip-172-31-38-75 ~]$ exit
+logout
+Connection to ec2-34-213-76-0.us-west-2.compute.amazonaws.com clo
+
+CHNSIPDT0T303+user@CHNSIPDT0T303 MINGW64 /c/Temp
+$
+
+CHNSIPDT0T303+user@CHNSIPDT0T303 MINGW64 /c/Temp
+$ chmod 400 kp162aug.pem
+
+CHNSIPDT0T303+user@CHNSIPDT0T303 MINGW64 /c/Temp
+$ ssh -i "kp162aug.pem" ec2-user@ec2-34-213-76-0.us-west-2.comput
+Last login: Wed Aug 16 08:48:43 2017 from 202.91.140.97
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2017.03-release-notes/
+2 package(s) needed for security, out of 6 available
+Run "sudo yum update" to apply all updates.
+[ec2-user@ip-172-31-38-75 ~]$ pwd
+/home/ec2-user
+[ec2-user@ip-172-31-38-75 ~]$ mkdir Test
+mkdir: cannot create directory ‘Test’: File exists
+[ec2-user@ip-172-31-38-75 ~]$ cd Test
+[ec2-user@ip-172-31-38-75 Test]$ cd DockerFile
+-bash: cd: DockerFile: No such file or directory
+[ec2-user@ip-172-31-38-75 Test]$ vi DockerFile
+[ec2-user@ip-172-31-38-75 Test]$ vi DockerFile
+[ec2-user@ip-172-31-38-75 Test]$ cd Tesr
+-bash: cd: Tesr: No such file or directory
+[ec2-user@ip-172-31-38-75 Test]$ cd Test
+-bash: cd: Test: No such file or directory
+[ec2-user@ip-172-31-38-75 Test]$ vi DockerFile
+[ec2-user@ip-172-31-38-75 Test]$ docker build -t lavanya/testimag.
+unable to prepare context: unable to evaluate symlinks in Dockerfth: lstat /home/ec2-user/Test/Dockerfile: no such file or directo
+[ec2-user@ip-172-31-38-75 Test]$ cd ..
+[ec2-user@ip-172-31-38-75 ~]$ cd ..
+[ec2-user@ip-172-31-38-75 home]$ cd ..
+[ec2-user@ip-172-31-38-75 /]$ docker images
+Got permission denied while trying to connect to the Docker daemoet at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdockk/v1.27/images/json: dial unix /var/run/docker.sock: connect: pern denied
+[ec2-user@ip-172-31-38-75 /]$ sudo su -
+Last login: Wed Aug 16 08:55:20 UTC 2017 on pts/0
+[root@ip-172-31-38-75 ~]# mkdir Test
+mkdir: cannot create directory ‘Test’: File exists
+[root@ip-172-31-38-75 ~]# cd Test
+[root@ip-172-31-38-75 Test]# vi DockerFile
+[root@ip-172-31-38-75 Test]# docker build -t lavanya/testimages:1
+unable to prepare context: unable to evaluate symlinks in Dockerfth: lstat /root/Test/Dockerfile: no such file or directory
+[root@ip-172-31-38-75 Test]# cd Test
+-bash: cd: Test: No such file or directory
+[root@ip-172-31-38-75 Test]# cat DockerFile
+FROM ubuntu:14.04
+RUN apt-get update
+RUN apt-get install -y curl
+RUN apt-get install -y vim
+[root@ip-172-31-38-75 Test]# docker build -t lavanya/testimages:1
+unable to prepare context: unable to evaluate symlinks in Dockerfth: lstat /root/Test/Dockerfile: no such file or directory
+[root@ip-172-31-38-75 Test]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREAT         SIZE
+lavanya/curl        1.0                 e72fec94a84f        Aboutur ago   220 MB
+ubuntu              latest              ccc7a11d65b1        5 day         120 MB
+ubuntu              14.04               c69811d4e993        5 day         188 MB
+tomcat              7                   77a01a142db4        6 day         357 MB
+centos              7                   328edcd84f1b        12 da         193 MB
+hello-world         latest              1815c82652c0        2 mono        1.84 kB
+[root@ip-172-31-38-75 Test]# docker build -t lavanya/testimags:1.
+unable to prepare context: unable to evaluate symlinks in Dockerfth: lstat /root/Test/Dockerfile: no such file or directory
+[root@ip-172-31-38-75 Test]# cat Dockerfile
+cat: Dockerfile: No such file or directory
+[root@ip-172-31-38-75 Test]# vi Dockerfile
+[root@ip-172-31-38-75 Test]# docker build -t lavanya/testimages:1
+Sending build context to Docker daemon 3.072 kB
+Step 1/4 : FROM ubuntu:14.04
+ ---> c69811d4e993
+Step 2/4 : RUN apt-get update
+ ---> Running in 5a821c530449
+Ign http://archive.ubuntu.com trusty InRelease
+Get:1 http://security.ubuntu.com trusty-security InRelease [65.9
+Get:2 http://archive.ubuntu.com trusty-updates InRelease [65.9 kB
+Get:3 http://security.ubuntu.com trusty-security/universe Sources kB]
+Get:4 http://archive.ubuntu.com trusty-backports InRelease [65.9
+Get:5 http://security.ubuntu.com trusty-security/main amd64 Packa11 kB]
+Get:6 http://archive.ubuntu.com trusty Release.gpg [933 B]
+Get:7 http://archive.ubuntu.com trusty-updates/universe Sources []
+Get:8 http://security.ubuntu.com trusty-security/restricted amd64ges [17.9 kB]
+Get:9 http://archive.ubuntu.com trusty-updates/main amd64 Package0 kB]
+Get:10 http://security.ubuntu.com trusty-security/universe amd64 es [230 kB]
+Get:11 http://security.ubuntu.com trusty-security/multiverse amd6ages [4016 B]
+Get:12 http://archive.ubuntu.com trusty-updates/restricted amd64 es [21.2 kB]
+Get:13 http://archive.ubuntu.com trusty-updates/universe amd64 Pa [543 kB]
+Get:14 http://archive.ubuntu.com trusty-updates/multiverse amd64 es [15.6 kB]
+Get:15 http://archive.ubuntu.com trusty-backports/main amd64 Pack14.8 kB]
+Get:16 http://archive.ubuntu.com trusty-backports/restricted amd6ages [40 B]
+Get:17 http://archive.ubuntu.com trusty-backports/universe amd64 es [52.6 kB]
+Get:18 http://archive.ubuntu.com trusty-backports/multiverse amd6ages [1396 B]
+Get:19 http://archive.ubuntu.com trusty Release [58.5 kB]
+Get:20 http://archive.ubuntu.com trusty/universe Sources [7926 kB
+Get:21 http://archive.ubuntu.com trusty/main amd64 Packages [1743
+Get:22 http://archive.ubuntu.com trusty/restricted amd64 Packages kB]
+Get:23 http://archive.ubuntu.com trusty/universe amd64 Packages [B]
+Get:24 http://archive.ubuntu.com trusty/multiverse amd64 PackageskB]
+Fetched 21.0 MB in 13s (1518 kB/s)
+Reading package lists...
+ ---> 33293e7d5652
+Removing intermediate container 5a821c530449
+Step 3/4 : RUN apt-get install -y curl
+ ---> Running in 57e2c45ce9fa
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following extra packages will be installed:
+  ca-certificates krb5-locales libasn1-8-heimdal libcurl3 libgssa5-2
+  libgssapi3-heimdal libhcrypto4-heimdal libheimbase1-heimdal
+  libheimntlm0-heimdal libhx509-5-heimdal libidn11 libk5crypto3 ltils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2
+  libroken18-heimdal librtmp0 libsasl2-2 libsasl2-modules libsaslles-db
+  libwind0-heimdal openssl
+Suggested packages:
+  krb5-doc krb5-user libsasl2-modules-otp libsasl2-modules-ldap
+  libsasl2-modules-sql libsasl2-modules-gssapi-mit
+  libsasl2-modules-gssapi-heimdal
+The following NEW packages will be installed:
+  ca-certificates curl krb5-locales libasn1-8-heimdal libcurl3
+  libgssapi-krb5-2 libgssapi3-heimdal libhcrypto4-heimdal libheimheimdal
+  libheimntlm0-heimdal libhx509-5-heimdal libidn11 libk5crypto3 ltils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2
+  libroken18-heimdal librtmp0 libsasl2-2 libsasl2-modules libsaslles-db
+  libwind0-heimdal openssl
+0 upgraded, 25 newly installed, 0 to remove and 0 not upgraded.
+Need to get 2683 kB of archives.
+After this operation, 11.6 MB of additional disk space will be us
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libroheimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [39.9 kB]
+Get:2 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libaseimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [160 kB]
+Get:3 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkrort0 amd64 1.12+dfsg-2ubuntu5.3 [30.7 kB]
+Get:4 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libk53 amd64 1.12+dfsg-2ubuntu5.3 [79.6 kB]
+Get:5 http://archive.ubuntu.com/ubuntu/ trusty/main libkeyutils1 1.5.6-1 [7318 B]
+Get:6 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkrmd64 1.12+dfsg-2ubuntu5.3 [262 kB]
+Get:7 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libgsrb5-2 amd64 1.12+dfsg-2ubuntu5.3 [114 kB]
+Get:8 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libhc-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [84.1 kB]
+Get:9 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libhe1-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [29.0 kB]
+Get:10 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libweimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [47.9 kB]
+Get:11 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libh-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [104 kB]
+Get:12 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libk-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [196 kB]
+Get:13 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libhm0-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [15.2 kB]
+Get:14 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libg-heimdal amd64 1.6~git20131207+dfsg-1ubuntu1.2 [89.7 kB]
+Get:15 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libimd64 1.28-1ubuntu2.1 [94.4 kB]
+Get:16 http://archive.ubuntu.com/ubuntu/ trusty/main libsasl2-modb amd64 2.1.25.dfsg1-17build1 [14.9 kB]
+Get:17 http://archive.ubuntu.com/ubuntu/ trusty/main libsasl2-2 a.1.25.dfsg1-17build1 [56.5 kB]
+Get:18 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libl4-2 amd64 2.4.31-1+nmu2ubuntu8.4 [153 kB]
+Get:19 http://archive.ubuntu.com/ubuntu/ trusty-updates/main librmd64 2.4+20121230.gitdf6c518-1ubuntu0.1 [50.4 kB]
+Get:20 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libcmd64 7.35.0-1ubuntu2.10 [173 kB]
+Get:21 http://archive.ubuntu.com/ubuntu/ trusty-updates/main opend64 1.0.1f-1ubuntu2.22 [489 kB]
+Get:22 http://archive.ubuntu.com/ubuntu/ trusty-updates/main ca-ccates all 20160104ubuntu0.14.04.1 [190 kB]
+Get:23 http://archive.ubuntu.com/ubuntu/ trusty-updates/main krb5es all 1.12+dfsg-2ubuntu5.3 [13.5 kB]
+Get:24 http://archive.ubuntu.com/ubuntu/ trusty/main libsasl2-modmd64 2.1.25.dfsg1-17build1 [64.3 kB]
+Get:25 http://archive.ubuntu.com/ubuntu/ trusty-updates/main curl 7.35.0-1ubuntu2.10 [123 kB]
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin:
+Fetched 2683 kB in 4s (612 kB/s)
+Selecting previously unselected package libroken18-heimdal:amd64.
+(Reading database ... 11569 files and directories currently insta
+Preparing to unpack .../libroken18-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libroken18-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libasn1-8-heimdal:amd64.
+Preparing to unpack .../libasn1-8-heimdal_1.6~git20131207+dfsg-1u.2_amd64.deb ...
+Unpacking libasn1-8-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../libkrb5support0_1.12+dfsg-2ubuntu5.3_amd6...
+Unpacking libkrb5support0:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../libk5crypto3_1.12+dfsg-2ubuntu5.3_amd64.d
+Unpacking libk5crypto3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../libkeyutils1_1.5.6-1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.5.6-1) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../libkrb5-3_1.12+dfsg-2ubuntu5.3_amd64.deb
+Unpacking libkrb5-3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../libgssapi-krb5-2_1.12+dfsg-2ubuntu5.3_amd ...
+Unpacking libgssapi-krb5-2:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libhcrypto4-heimdal:amd64
+Preparing to unpack .../libhcrypto4-heimdal_1.6~git20131207+dfsg-u1.2_amd64.deb ...
+Unpacking libhcrypto4-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Selecting previously unselected package libheimbase1-heimdal:amd6
+Preparing to unpack .../libheimbase1-heimdal_1.6~git20131207+dfsgtu1.2_amd64.deb ...
+Unpacking libheimbase1-heimdal:amd64 (1.6~git20131207+dfsg-1ubunt...
+Selecting previously unselected package libwind0-heimdal:amd64.
+Preparing to unpack .../libwind0-heimdal_1.6~git20131207+dfsg-1ub2_amd64.deb ...
+Unpacking libwind0-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.2
+Selecting previously unselected package libhx509-5-heimdal:amd64.
+Preparing to unpack .../libhx509-5-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libhx509-5-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libkrb5-26-heimdal:amd64.
+Preparing to unpack .../libkrb5-26-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libkrb5-26-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libheimntlm0-heimdal:amd6
+Preparing to unpack .../libheimntlm0-heimdal_1.6~git20131207+dfsgtu1.2_amd64.deb ...
+Unpacking libheimntlm0-heimdal:amd64 (1.6~git20131207+dfsg-1ubunt...
+Selecting previously unselected package libgssapi3-heimdal:amd64.
+Preparing to unpack .../libgssapi3-heimdal_1.6~git20131207+dfsg-11.2_amd64.deb ...
+Unpacking libgssapi3-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Selecting previously unselected package libidn11:amd64.
+Preparing to unpack .../libidn11_1.28-1ubuntu2.1_amd64.deb ...
+Unpacking libidn11:amd64 (1.28-1ubuntu2.1) ...
+Selecting previously unselected package libsasl2-modules-db:amd64
+Preparing to unpack .../libsasl2-modules-db_2.1.25.dfsg1-17build1.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.25.dfsg1-17build1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../libsasl2-2_2.1.25.dfsg1-17build1_amd64.de
+Unpacking libsasl2-2:amd64 (2.1.25.dfsg1-17build1) ...
+Selecting previously unselected package libldap-2.4-2:amd64.
+Preparing to unpack .../libldap-2.4-2_2.4.31-1+nmu2ubuntu8.4_amd6...
+Unpacking libldap-2.4-2:amd64 (2.4.31-1+nmu2ubuntu8.4) ...
+Selecting previously unselected package librtmp0:amd64.
+Preparing to unpack .../librtmp0_2.4+20121230.gitdf6c518-1ubuntu064.deb ...
+Unpacking librtmp0:amd64 (2.4+20121230.gitdf6c518-1ubuntu0.1) ...
+Selecting previously unselected package libcurl3:amd64.
+Preparing to unpack .../libcurl3_7.35.0-1ubuntu2.10_amd64.deb ...
+Unpacking libcurl3:amd64 (7.35.0-1ubuntu2.10) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../openssl_1.0.1f-1ubuntu2.22_amd64.deb ...
+Unpacking openssl (1.0.1f-1ubuntu2.22) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../ca-certificates_20160104ubuntu0.14.04.1_a ...
+Unpacking ca-certificates (20160104ubuntu0.14.04.1) ...
+Selecting previously unselected package krb5-locales.
+Preparing to unpack .../krb5-locales_1.12+dfsg-2ubuntu5.3_all.deb
+Unpacking krb5-locales (1.12+dfsg-2ubuntu5.3) ...
+Selecting previously unselected package libsasl2-modules:amd64.
+Preparing to unpack .../libsasl2-modules_2.1.25.dfsg1-17build1_amb ...
+Unpacking libsasl2-modules:amd64 (2.1.25.dfsg1-17build1) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.35.0-1ubuntu2.10_amd64.deb ...
+Unpacking curl (7.35.0-1ubuntu2.10) ...
+Setting up libroken18-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libasn1-8-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Setting up libkrb5support0:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libk5crypto3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libkeyutils1:amd64 (1.5.6-1) ...
+Setting up libkrb5-3:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libgssapi-krb5-2:amd64 (1.12+dfsg-2ubuntu5.3) ...
+Setting up libhcrypto4-heimdal:amd64 (1.6~git20131207+dfsg-1ubunt...
+Setting up libheimbase1-heimdal:amd64 (1.6~git20131207+dfsg-1ubun ...
+Setting up libwind0-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu1.
+Setting up libhx509-5-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libkrb5-26-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libheimntlm0-heimdal:amd64 (1.6~git20131207+dfsg-1ubun ...
+Setting up libgssapi3-heimdal:amd64 (1.6~git20131207+dfsg-1ubuntu..
+Setting up libidn11:amd64 (1.28-1ubuntu2.1) ...
+Setting up libsasl2-modules-db:amd64 (2.1.25.dfsg1-17build1) ...
+Setting up libsasl2-2:amd64 (2.1.25.dfsg1-17build1) ...
+Setting up libldap-2.4-2:amd64 (2.4.31-1+nmu2ubuntu8.4) ...
+Setting up librtmp0:amd64 (2.4+20121230.gitdf6c518-1ubuntu0.1) ..
+Setting up libcurl3:amd64 (7.35.0-1ubuntu2.10) ...
+Setting up openssl (1.0.1f-1ubuntu2.22) ...
+Setting up ca-certificates (20160104ubuntu0.14.04.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Setting up krb5-locales (1.12+dfsg-2ubuntu5.3) ...
+Setting up libsasl2-modules:amd64 (2.1.25.dfsg1-17build1) ...
+Setting up curl (7.35.0-1ubuntu2.10) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.13) ...
+Processing triggers for ca-certificates (20160104ubuntu0.14.04.1)
+Updating certificates in /etc/ssl/certs... 173 added, 0 removed;
+Running hooks in /etc/ca-certificates/update.d....done.
+ ---> 56b72bda8c71
+Removing intermediate container 57e2c45ce9fa
+Step 4/4 : RUN apt-get install -y vim
+ ---> Running in dc93e9e0a9a6
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following extra packages will be installed:
+  libgpm2 libpython2.7 libpython2.7-minimal libpython2.7-stdlib vtime
+Suggested packages:
+  gpm ctags vim-doc vim-scripts
+The following NEW packages will be installed:
+  libgpm2 libpython2.7 libpython2.7-minimal libpython2.7-stdlib v
+  vim-runtime
+0 upgraded, 6 newly installed, 0 to remove and 0 not upgraded.
+Need to get 9074 kB of archives.
+After this operation, 42.9 MB of additional disk space will be us
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/main libgpm2 amd644-6.1 [16.5 kB]
+Get:2 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libpy7-minimal amd64 2.7.6-8ubuntu0.3 [307 kB]
+Get:3 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libpy7-stdlib amd64 2.7.6-8ubuntu0.3 [1873 kB]
+Get:4 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libpy7 amd64 2.7.6-8ubuntu0.3 [1039 kB]
+Get:5 http://archive.ubuntu.com/ubuntu/ trusty-updates/main vim-r all 2:7.4.052-1ubuntu3.1 [4882 kB]
+Get:6 http://archive.ubuntu.com/ubuntu/ trusty-updates/main vim a:7.4.052-1ubuntu3.1 [955 kB]
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin:
+Fetched 9074 kB in 3s (2642 kB/s)
+Selecting previously unselected package libgpm2:amd64.
+(Reading database ... 12037 files and directories currently insta
+Preparing to unpack .../libgpm2_1.20.4-6.1_amd64.deb ...
+Unpacking libgpm2:amd64 (1.20.4-6.1) ...
+Selecting previously unselected package libpython2.7-minimal:amd6
+Preparing to unpack .../libpython2.7-minimal_2.7.6-8ubuntu0.3_amd ...
+Unpacking libpython2.7-minimal:amd64 (2.7.6-8ubuntu0.3) ...
+Selecting previously unselected package libpython2.7-stdlib:amd64
+Preparing to unpack .../libpython2.7-stdlib_2.7.6-8ubuntu0.3_amd6...
+Unpacking libpython2.7-stdlib:amd64 (2.7.6-8ubuntu0.3) ...
+Selecting previously unselected package libpython2.7:amd64.
+Preparing to unpack .../libpython2.7_2.7.6-8ubuntu0.3_amd64.deb .
+Unpacking libpython2.7:amd64 (2.7.6-8ubuntu0.3) ...
+Selecting previously unselected package vim-runtime.
+Preparing to unpack .../vim-runtime_2%3a7.4.052-1ubuntu3.1_all.de
+Adding 'diversion of /usr/share/vim/vim74/doc/help.txt to /usr/shm/vim74/doc/help.txt.vim-tiny by vim-runtime'
+Adding 'diversion of /usr/share/vim/vim74/doc/tags to /usr/share/m74/doc/tags.vim-tiny by vim-runtime'
+Unpacking vim-runtime (2:7.4.052-1ubuntu3.1) ...
+Selecting previously unselected package vim.
+Preparing to unpack .../vim_2%3a7.4.052-1ubuntu3.1_amd64.deb ...
+Unpacking vim (2:7.4.052-1ubuntu3.1) ...
+Setting up libgpm2:amd64 (1.20.4-6.1) ...
+Setting up libpython2.7-minimal:amd64 (2.7.6-8ubuntu0.3) ...
+Setting up libpython2.7-stdlib:amd64 (2.7.6-8ubuntu0.3) ...
+Setting up libpython2.7:amd64 (2.7.6-8ubuntu0.3) ...
+Setting up vim-runtime (2:7.4.052-1ubuntu3.1) ...
+Processing /usr/share/vim/addons/doc
+Setting up vim (2:7.4.052-1ubuntu3.1) ...
+update-alternatives: using /usr/bin/vim.basic to provide /usr/binvim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/binff (vimdiff) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin(rvim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin (rview) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bini) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin(view) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/binx) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/binr (editor) in auto mode
+Processing triggers for libc-bin (2.19-0ubuntu6.13) ...
+ ---> f73a79d93e92
+Removing intermediate container dc93e9e0a9a6
+Successfully built f73a79d93e92
+[root@ip-172-31-38-75 Test]# docker run -i -t lavanya/testimages:
+root@c506bce9c519:/# docker images
+bash: docker: command not found
+root@c506bce9c519:/# exit
+exit
+[root@ip-172-31-38-75 Test]# docker images
+REPOSITORY           TAG                 IMAGE ID            CREA           SIZE
+lavanya/testimages   1.0                 f73a79d93e92        Abounute ago   265 MB
+lavanya/curl         1.0                 e72fec94a84f        Abouour ago    220 MB
+ubuntu               latest              ccc7a11d65b1        5 da           120 MB
+ubuntu               14.04               c69811d4e993        5 da           188 MB
+tomcat               7                   77a01a142db4        6 da           357 MB
+centos               7                   328edcd84f1b        12 do          193 MB
+hello-world          latest              1815c82652c0        2 mogo         1.84 kB
+[root@ip-172-31-38-75 Test]# vi Dockerfile
+[root@ip-172-31-38-75 Test]# docker build -t lavanya/testimages:1.
+Sending build context to Docker daemon 3.072 kB
+Step 1/5 : FROM ubuntu:14.04
+ ---> c69811d4e993
+Step 2/5 : RUN apt-get update
+ ---> Using cache
+ ---> 33293e7d5652
+Step 3/5 : RUN apt-get install -y curl
+ ---> Using cache
+ ---> 56b72bda8c71
+Step 4/5 : RUN apt-get install -y vim
+ ---> Using cache
+ ---> f73a79d93e92
+Step 5/5 : CMD ping 127.0.0.1 -c 30
+ ---> Running in 92d1454eff89
+ ---> 06e9f38e3661
+Removing intermediate container 92d1454eff89
+Successfully built 06e9f38e3661
+[root@ip-172-31-38-75 Test]# docker images                       REPOSITORY           TAG                 IMAGE ID            CREA             SIZE
+lavanya/testimages   1.0                 06e9f38e3661        10 snds ago      265 MB
+lavanya/curl         1.0                 e72fec94a84f        Aboun hour ago   220 MB
+ubuntu               latest              ccc7a11d65b1        5 daago          120 MB
+ubuntu               14.04               c69811d4e993        5 daago          188 MB
+tomcat               7                   77a01a142db4        6 daago          357 MB
+centos               7                   328edcd84f1b        12 d ago         193 MB
+hello-world          latest              1815c82652c0        2 mos ago        1.84 kB
+[root@ip-172-31-38-75 Test]# docker run -i -t lavanya/testimages:
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=255 time=0.030 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=255 time=0.031 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=4 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=5 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=6 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=7 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=8 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=9 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=10 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=11 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=12 ttl=255 time=0.038 ms
+64 bytes from 127.0.0.1: icmp_seq=13 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=14 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=15 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=16 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=17 ttl=255 time=0.038 ms
+64 bytes from 127.0.0.1: icmp_seq=18 ttl=255 time=0.039 ms
+64 bytes from 127.0.0.1: icmp_seq=19 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=20 ttl=255 time=0.044 ms
+64 bytes from 127.0.0.1: icmp_seq=21 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=22 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=23 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=24 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=25 ttl=255 time=0.043 ms
+64 bytes from 127.0.0.1: icmp_seq=26 ttl=255 time=0.040 ms
+64 bytes from 127.0.0.1: icmp_seq=27 ttl=255 time=0.041 ms
+64 bytes from 127.0.0.1: icmp_seq=28 ttl=255 time=0.042 ms
+64 bytes from 127.0.0.1: icmp_seq=29 ttl=255 time=0.043 ms
+64 bytes from 127.0.0.1: icmp_seq=30 ttl=255 time=0.045 ms
+
+--- 127.0.0.1 ping statistics ---
+30 packets transmitted, 30 received, 0% packet loss, time 29698ms
+rtt min/avg/max/mdev = 0.030/0.040/0.045/0.005 ms
+[root@ip-172-31-38-75 Test]# cat Dockerfile
+FROM ubuntu:14.04
+RUN apt-get update
+RUN apt-get install -y curl
+RUN apt-get install -y vim
+CMD ["ping", "127.0.0.1", "-c", "30"]
+[root@ip-172-31-38-75 Test]# docker tag lavanya/testimage:1.1 lav
+Error response from daemon: no such id: lavanya/testimage:1.1
+[root@ip-172-31-38-75 Test]# docker tag lavanya/testimage:1.1 lbo
+Error response from daemon: no such id: lavanya/testimage:1.1
+[root@ip-172-31-38-75 Test]# docker tag lavanya/testimage:1.1 lav
+Error response from daemon: no such id: lavanya/testimage:1.1
+[root@ip-172-31-38-75 Test]# docker tag lavanya/testimages:1.1 la
+Error response from daemon: no such id: lavanya/testimages:1.1
+[root@ip-172-31-38-75 Test]# docker tag lavanya/testimages:1.0 la
+[root@ip-172-31-38-75 Test]# docker push lavanya/lavanya:1.1
+The push refers to a repository [docker.io/lavanya/lavanya]
+17b6ec703e83: Preparing
+37b882733ef1: Preparing
+a7a591e4643a: Preparing
+f668bc0d79c1: Preparing
+05e7ab001e8a: Preparing
+45dee3415f42: Waiting
+cf195c989ceb: Waiting
+826fc2344fbb: Waiting
+denied: requested access to the resource is denied
+[root@ip-172-31-38-75 Test]# docker pull lavanya/lavanya:1.1
+Error response from daemon: repository lavanya/lavanya not found: does not exist or no pull access
+[root@ip-172-31-38-75 Test]# docker push lavanya/lavanya:1.1
+The push refers to a repository [docker.io/lavanya/lavanya]
+17b6ec703e83: Preparing
+37b882733ef1: Preparing
+a7a591e4643a: Preparing
+f668bc0d79c1: Preparing
+05e7ab001e8a: Preparing
+45dee3415f42: Waiting
+cf195c989ceb: Waiting
+826fc2344fbb: Waiting
+denied: requested access to the resource is denied
+[root@ip-172-31-38-75 Test]#
